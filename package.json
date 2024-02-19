@@ -1,0 +1,26 @@
+{
+  "name": "e-commerce",
+  "version": "1.0.0",
+  "description": "Sell Stuff",
+  "main": "server/server.js",
+  "scripts": {
+    "start": "node server --ignore client",
+    "develop": "concurrently \"cd server && npm run watch\" \"cd client && npm start\"",
+    "install": "cd server && npm i && cd ../client && npm i",
+    "seed": "cd server && npm run seed",
+    "build": "cd client && npm run build"
+  },
+  "keywords": [],
+  "author": "Justin Connors",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^5.1.0"
+  },
+  "dependencies": {
+    "react-icons": "^4.9.0"
+  },
+  "engines": {
+    "node": "18.x"
+  },
+  "homepage": "./client/build"
+}
