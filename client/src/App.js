@@ -13,9 +13,6 @@ import {
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 
-import "@shoelace-style/shoelace/dist/themes/dark.css";
-import { setBasePath } from "@shoelace-style/shoelace/dist/utilities/base-path";
-
 import Home from "./pages/Home";
 import NoMatch from "./pages/NoMatch";
 import Login from "./pages/Login";
@@ -24,10 +21,6 @@ import Nav from "./components/Nav/index";
 import Footer from "./components/Footer/index";
 import Profile from "./pages/Profile";
 import Auth from "./utils/auth";
-
-setBasePath(
-  "https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.4.0/dist/"
-);
 
 const httpLink = createHttpLink({
   uri: "/graphql",
