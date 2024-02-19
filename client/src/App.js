@@ -33,6 +33,21 @@ const darkTheme = createTheme({
   },
 });
 
+//material ui lightTheme
+const lightTheme = createTheme({
+  palette: {
+    mode: "light",
+  },
+});
+
+const themeSelector = () => {
+  if (localStorage.getItem("theme") === "dark") {
+    return darkTheme;
+  } else {
+    return lightTheme;
+  }
+};
+
 const httpLink = createHttpLink({
   uri: "/graphql",
 });
@@ -56,7 +71,7 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <Router>
-        <ThemeProvider theme={darkTheme}>
+        <ThemeProvider theme={themeSelector}>
           <CssBaseline />
           <div>
             <Nav />

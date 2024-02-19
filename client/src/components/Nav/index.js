@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { AppBar, Toolbar, Typography, Button, IconButton } from "@mui/material";
 import { styled, alpha } from "@mui/material/styles";
 import SearchIcon from "@mui/icons-material/Search";
+import CartIcon from "@mui/icons-material/ShoppingCart";
 import InputBase from "@mui/material/InputBase";
+// import User from "../../utils/User";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -53,6 +55,41 @@ const Nav = () => {
         <Typography variant="h6" style={{ flexGrow: 1 }}>
           Commerce
         </Typography>
+        {localStorage.getItem("theme") === "dark" ? (
+          <Button
+            size="small"
+            color="inherit"
+            variant="outlined"
+            style={{ textTransform: "none" }}
+            onClick={() => {
+              if (localStorage.getItem("theme") === "dark") {
+                localStorage.setItem("theme", "light");
+              } else {
+                localStorage.setItem("theme", "dark");
+              }
+              window.location.reload();
+            }}
+          >
+            Light
+          </Button>
+        ) : (
+          <Button
+            color="inherit"
+            variant="outlined"
+            size="small"
+            style={{ textTransform: "none" }}
+            onClick={() => {
+              if (localStorage.getItem("theme") === "dark") {
+                localStorage.setItem("theme", "light");
+              } else {
+                localStorage.setItem("theme", "dark");
+              }
+              window.location.reload();
+            }}
+          >
+            Dark
+          </Button>
+        )}
         <Search>
           <SearchIconWrapper>
             <SearchIcon />
@@ -62,8 +99,17 @@ const Nav = () => {
             inputProps={{ "aria-label": "search" }}
           />
         </Search>
-        <Button color="inherit">Sign In</Button>
-        <Button color="inherit">Cart</Button>
+        {/* {user.loggedIn ? (
+          <Button color="inherit">Profile</Button>
+        ) : (
+          <Button color="inherit">Sign In/Up</Button>
+        )} */}
+        <Button color="inherit" style={{ textTransform: "none" }}>
+          Sign In/Up
+        </Button>
+        <IconButton color="inherit">
+          <CartIcon />
+        </IconButton>
       </Toolbar>
     </AppBar>
   );
