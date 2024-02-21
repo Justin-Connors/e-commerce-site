@@ -1,8 +1,8 @@
 import React from "react";
-import { makeStyles } from "@mui/material/styles";
+import { styled, alpha } from "@mui/material/styles";
 import { Typography, Link } from "@mui/material";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = styled((theme) => ({
   footer: {
     backgroundColor: theme.palette.background.paper,
     padding: theme.spacing(6),
