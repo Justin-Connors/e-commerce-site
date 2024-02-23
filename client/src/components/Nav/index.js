@@ -5,8 +5,6 @@ import SearchIcon from "@mui/icons-material/Search";
 import CartIcon from "@mui/icons-material/ShoppingCart";
 import InputBase from "@mui/material/InputBase";
 import { Switch } from "@mui/material";
-import Brightness4Icon from "@mui/icons-material/Brightness4";
-import Brightness7Icon from "@mui/icons-material/Brightness7";
 // import User from "../../utils/User";
 
 const Search = styled("div")(({ theme }) => ({
@@ -118,14 +116,16 @@ const ThemeSwitch = () => {
 const Nav = () => {
   return (
     <AppBar position="static">
-      <Toolbar>
-        <Typography variant="h6" style={{ flexGrow: 1 }}>
-          Commerce
-        </Typography>
-        <Toolbar>
-          <ThemeSwitch />
-        </Toolbar>
-        <Search>
+      <Toolbar style={{ justifyContent: "flex-end" }}>
+        <Typography variant="h6">Commerce</Typography>
+        <Search
+          style={{
+            marginRight: "auto",
+            marginLeft: "2rem",
+            flexGrow: 1,
+            maxWidth: "500px",
+          }}
+        >
           <SearchIconWrapper>
             <SearchIcon />
           </SearchIconWrapper>
@@ -145,6 +145,9 @@ const Nav = () => {
         <IconButton color="inherit">
           <CartIcon />
         </IconButton>
+        <Toolbar style={{ alignSelf: "flex-end" }}>
+          <ThemeSwitch />
+        </Toolbar>
       </Toolbar>
     </AppBar>
   );
