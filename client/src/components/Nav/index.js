@@ -1,5 +1,14 @@
 import React, { useState } from "react";
-import { AppBar, Toolbar, Typography, Button, IconButton } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import auth from "../../utils/auth";
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  Button,
+  IconButton,
+  Divider,
+} from "@mui/material";
 import { styled, alpha } from "@mui/material/styles";
 import SearchIcon from "@mui/icons-material/Search";
 import CartIcon from "@mui/icons-material/ShoppingCart";
@@ -67,6 +76,13 @@ const ThemeSwitcher = () => {
 };
 
 const Nav = () => {
+  const navigate = useNavigate();
+
+  const logout = () => {
+    auth.logout();
+    navigate("/");
+  };
+
   return (
     <AppBar position="static">
       <Toolbar style={{ justifyContent: "flex-end" }}>
@@ -87,13 +103,20 @@ const Nav = () => {
             inputProps={{ "aria-label": "search" }}
           />
         </Search>
-        {/* {user.loggedIn ? (
-          <Button color="inherit">Profile</Button>
-        ) : (
-          <Button color="inherit">Sign In/Up</Button>
-        )} */}
-        <Button color="inherit" style={{ textTransform: "none" }}>
-          Sign In/Up
+        <Button
+          color="inherit"
+          style={{ textTransform: "none", marginRight: "0.25rem" }}
+          onClick={() => navigate("/login")}
+        >
+          Login
+        </Button>
+        <Divider orientation="vertical" flexItem variant="middle" />
+        <Button
+          color="inherit"
+          style={{ textTransform: "none", marginLeft: "0.25rem" }}
+          onClick={() => navigate("/signup")}
+        >
+          Sign Up
         </Button>
         <IconButton color="inherit">
           <CartIcon />
