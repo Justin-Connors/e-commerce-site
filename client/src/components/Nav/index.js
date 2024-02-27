@@ -86,7 +86,13 @@ const Nav = () => {
   return (
     <AppBar position="static">
       <Toolbar style={{ justifyContent: "flex-end" }}>
-        <Typography variant="h6">E-Commerce</Typography>
+        <Typography
+          variant="h6"
+          onClick={() => navigate("/")}
+          style={{ cursor: "pointer" }}
+        >
+          E-Commerce
+        </Typography>
         <Search
           style={{
             marginRight: "auto",

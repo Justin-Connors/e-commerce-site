@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
-const Home = () => {
+const Home = (props) => {
+  useEffect(() => {
+    document.title = props.title;
+  }, [props.title]);
   return (
     <div>
       <h1>Welcome to our e-commerce site!</h1>
