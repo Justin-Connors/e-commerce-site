@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -9,8 +9,12 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 
-const Login = () => {
+const Login = (props) => {
   const navigate = useNavigate();
+
+  useEffect(() => {
+    document.title = props.title;
+  }, [props.title]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
