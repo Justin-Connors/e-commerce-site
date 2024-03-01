@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
+import { useMutation } from "@apollo/client";
 import { useNavigate } from "react-router-dom";
+import Auth from "../../utils/auth";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -8,22 +10,42 @@ import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
+import { LOGIN } from "../../utils/mutations";
 
 const Login = (props) => {
   const navigate = useNavigate();
+
+  const [login] = useMutation(LOGIN);
+  const [formState, setFormState] = useState({
+    email: "",
+    password: "",
+  });
 
   useEffect(() => {
     document.title = props.title;
   }, [props.title]);
 
-  const handleSubmit = (event) => {
+  const handleFormSubmit = async (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
+    try {
+      const mutationResponse = await login({
+        variables: { email: formState.email, password: formState.password },
+      });
+      const token = mutationResponse.data.login.token;
+      Auth.login(token);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormState({
+      ...formState,
+      [name]: value,
     });
   };
+
   return (
     <Box
       sx={{
@@ -36,7 +58,12 @@ const Login = (props) => {
       <Typography component="h1" variant="h5">
         Login
       </Typography>
-      <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+      <Box
+        component="form"
+        onSubmit={handleFormSubmit}
+        noValidate
+        sx={{ mt: 1 }}
+      >
         <TextField
           margin="normal"
           required
@@ -46,6 +73,7 @@ const Login = (props) => {
           name="email"
           autoComplete="email"
           autoFocus
+          onChange={handleChange}
         />
 
         <TextField
@@ -57,6 +85,7 @@ const Login = (props) => {
           type="password"
           id="password"
           autoComplete="current-password"
+          onChange={handleChange}
         />
         <FormControlLabel
           control={<Checkbox value="remember" color="primary" />}

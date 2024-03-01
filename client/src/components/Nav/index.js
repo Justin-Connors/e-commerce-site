@@ -109,21 +109,34 @@ const Nav = () => {
             inputProps={{ "aria-label": "search" }}
           />
         </Search>
-        <Button
-          color="inherit"
-          style={{ textTransform: "none", marginRight: "0.25rem" }}
-          onClick={() => navigate("/login")}
-        >
-          Login
-        </Button>
-        <Divider orientation="vertical" flexItem variant="middle" />
-        <Button
-          color="inherit"
-          style={{ textTransform: "none", marginLeft: "0.25rem" }}
-          onClick={() => navigate("/signup")}
-        >
-          Sign Up
-        </Button>
+        {auth.loggedIn() ? (
+          <Button
+            color="inherit"
+            style={{ textTransform: "none" }}
+            onClick={logout}
+          >
+            Logout
+          </Button>
+        ) : (
+          <>
+            <Button
+              color="inherit"
+              style={{ textTransform: "none", marginRight: "0.25rem" }}
+              onClick={() => navigate("/login")}
+            >
+              Login
+            </Button>
+            <Divider orientation="vertical" flexItem variant="middle" />
+            <Button
+              color="inherit"
+              style={{ textTransform: "none", marginLeft: "0.25rem" }}
+              onClick={() => navigate("/signup")}
+            >
+              Sign Up
+            </Button>
+          </>
+        )}
+
         <IconButton color="inherit">
           <CartIcon />
         </IconButton>
