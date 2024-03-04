@@ -1,6 +1,6 @@
 const { AuthenticationError } = require("apollo-server-express");
 const mongoose = require("mongoose");
-const { User } = require("../models");
+const { User, Product } = require("../models");
 const { signToken } = require("../utils/auth");
 
 const resolvers = {
@@ -17,6 +17,17 @@ const resolvers = {
       const user = await User.findById(args.userId).select("-email");
       return user;
     },
+    product: async (parent, args, context) => {
+      const product = await Product.findById(context.product._id);
+      return product;
+    },
+    productById: async (parent, args, context) => {
+      const product = await Product.findById(args.productId).select("-name");
+      return product;
+    },
+    products: async () => {
+      return Product.find({});
+    },
   },
   Mutation: {
     addUser: async (parent, args) => {
@@ -32,6 +43,34 @@ const resolvers = {
         });
       }
 
+      throw new AuthenticationError("Not logged in");
+    },
+    addProduct: async (parent, args) => {
+      if(context.user) {
+      const product = await Product.create(args);
+      return product;
+      }
+
+      throw new AuthenticationError("Not logged in");
+    },
+    updateProduct: async (parent, args, context) => {
+      if(context.user) {
+        return await Product.findByIdAndUpdate(context.product._id, args, {
+          new: true,
+        });
+      }
+
+      if(!Product) {
+        throw new AuthenticationError("Product not found!");
+      }
+
+      throw new AuthenticationError("Not logged in");
+    },
+    deleteProduct: async (parent, args, context) => {
+      if(context.user) {
+        return await Product.findByIdAndDelete(context.product._id);
+      }
+      
       throw new AuthenticationError("Not logged in");
     },
     login: async (parent, { email, password }) => {
