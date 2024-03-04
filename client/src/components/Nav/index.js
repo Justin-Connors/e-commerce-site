@@ -110,6 +110,7 @@ const Nav = () => {
           />
         </Search>
         {auth.loggedIn() ? (
+          <>
           <Button
             color="inherit"
             style={{ textTransform: "none" }}
@@ -117,6 +118,14 @@ const Nav = () => {
           >
             Logout
           </Button>
+          <Button
+            color="inherit"
+            style={{ textTransform: "none" }}
+            onClick={() => navigate("/profile")}
+          >
+            Profile
+          </Button>
+          </>
         ) : (
           <>
             <Button
