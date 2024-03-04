@@ -26,3 +26,29 @@ export const QUERY_USER_BY_ID = gql`
     }
   }
 `;
+
+export const QUERY_PRODUCT = gql`
+  query Query {
+    product {
+      _id
+      name
+      description
+      image
+      price
+      quantity
+    }
+  }
+`;
+
+export const QUERY_PRODUCT_BY_ID = gql`
+  query Query($productId: ID) {
+    productById(productId: $productId) {
+      _id
+      name
+      description
+      image
+      price
+      quantity
+    }
+  }
+`;
