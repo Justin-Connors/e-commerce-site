@@ -26,7 +26,12 @@ const resolvers = {
       return product;
     },
     products: async () => {
-      return Product.find({});
+      return Product.find({
+        $or: [
+          { name: { $regex: params.filter, $options: "i" } },
+          { description: { $regex: params.filter, $options: "i" } },
+        ],
+      });
     },
   },
   Mutation: {
@@ -70,7 +75,7 @@ const resolvers = {
       if(context.user) {
         return await Product.findByIdAndDelete(context.product._id);
       }
-      
+
       throw new AuthenticationError("Not logged in");
     },
     login: async (parent, { email, password }) => {
