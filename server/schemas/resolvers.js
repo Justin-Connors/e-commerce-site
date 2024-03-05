@@ -22,8 +22,12 @@ const resolvers = {
       return product;
     },
     productById: async (parent, args, context) => {
-      const product = await Product.findById(args.productId).select("-name");
+      const product = await Product.findById(args.productId);
       return product;
+    },
+    allProducts: async () => {
+      const result = await Product.find();
+      return result;
     },
     products: async () => {
       return Product.find({
