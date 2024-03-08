@@ -13,7 +13,10 @@ const useStyles = styled((theme) => ({
   },
 }));
 
-const Profile = () => {
+const Profile = (props) => {
+  useEffect(() => {
+    document.title = props.title;
+  }, [props.title]);
   const classes = useStyles();
   return (
     <div>
