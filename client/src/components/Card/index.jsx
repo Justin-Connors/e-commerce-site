@@ -11,7 +11,7 @@ const ProductCard = ({
     price
  }) => {
     return (
-        <Card style={{ maxWidth: '300px'}}>
+        <Card sx={{ width: '250px', m: 0.5 }}>
             <CardMedia
                 component="img"
                 alt={name}

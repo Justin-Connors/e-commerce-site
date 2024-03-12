@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Card from "../components/Card";
+import Box from "@mui/material/Box";
 import { useQuery } from "@apollo/client";
 import { QUERY_PRODUCTS } from "../utils/queries";
 
@@ -13,8 +14,8 @@ const Home = (props) => {
 
   if (data) {
     allProducts = data?.allProducts[0];
-    trendingProducts = data?.allProducts?.slice(1, 4);
-    productList = data?.allProducts?.slice(4, 8);
+    trendingProducts = data?.allProducts?.slice(1, 3);
+    productList = data?.allProducts?.slice(0);
   }
 
   useEffect(() => {
@@ -24,6 +25,7 @@ const Home = (props) => {
   return (
     <div>
       <h1>Welcome to our e-commerce site!</h1>
+      <Box sx={{ display: "flex", justifyContent: "center" }}>
           {productList?.map((product) => (
             <Card
             key={product._id}
@@ -33,6 +35,7 @@ const Home = (props) => {
             price={product.price}
           />
           ))}
+        </Box>
     </div>
   );
 };
