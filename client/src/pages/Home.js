@@ -24,7 +24,8 @@ const Home = (props) => {
 
   return (
     <div>
-      <h1>Welcome to our e-commerce site!</h1>
+      <h1 style={{ textAlign: 'center' }}>Welcome to my e-commerce site!</h1>
+      <h2 style={{ textAlign: 'center' }}>Here's some popular items!</h2>
       <Box sx={{ display: "flex", justifyContent: "center" }}>
           {productList?.map((product) => (
             <Card

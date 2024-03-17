@@ -11,8 +11,9 @@ const ProductCard = ({
     price
  }) => {
     return (
-        <Card sx={{ width: '250px', m: 0.5 }}>
+        <Card sx={{ width: '250px', m: 0.5 }} >
             <CardMedia
+                color="inherit"
                 component="img"
                 alt={name}
                 height="140"
@@ -20,13 +21,13 @@ const ProductCard = ({
                 title={name}
             />
             <CardContent>
-                <Typography variant="h5" component="h2">
+                <Typography variant="h5" color="inherit" component="h2">
                     {name}
                 </Typography>
-                <Typography variant="body2" color="textSecondary" component="p">
+                <Typography variant="body2" color="inherit" component="p">
                     {description}
                 </Typography>
-                <Typography variant="h6" component="p">
+                <Typography variant="h6" color="inherit" component="p">
                     Price: ${price}
                 </Typography>
             </CardContent>
